@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.Stack;
+
 public class BST<E extends Comparable<E>> {
 
     private TreeNode<E> root;
@@ -79,6 +81,50 @@ public class BST<E extends Comparable<E>> {
 //            preOrder(node.right);
 //        }
 
+    }
+
+    // Pre-order traverse without recursive
+    public void preOrderNR() {
+        Stack<TreeNode<E>> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode<E> cur = stack.pop();
+            System.out.print(cur.e + " ");
+
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
+        }
+        System.out.println();
+    }
+
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    private void inOrder(TreeNode<E> node) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left);
+        System.out.print(node.e + " ");
+        inOrder(node.right);
+    }
+
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    private void postOrder(TreeNode<E> node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.e + " ");
     }
 
     @Override
